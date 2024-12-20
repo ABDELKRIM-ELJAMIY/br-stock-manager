@@ -7,5 +7,4 @@ class Product {
         this.price = price;
     };
 }
-// exports.Product=Product;
 module.exports = Product;

@@ -1,21 +1,12 @@
 const prompt = require("prompt-sync")();
 const fs = require('fs');
-<<<<<<< HEAD
-const Product = require("./Product");
-=======
 const Product = require("./product");
->>>>>>> f701db886fe91c888070ce39ab7dd04c6870936f
 class Inventory {
     constructor() {
         this.Products = [];
         this.filePath = 'products.json';
-        this.currentId = 1;
     }
-<<<<<<< HEAD
-    saveToFile(){
-=======
     saveToFile() {
->>>>>>> f701db886fe91c888070ce39ab7dd04c6870936f
         try {
             fs.writeFileSync(this.filePath, JSON.stringify(this.Products, null, 3));
             console.log("Données sauvegardées !");
@@ -24,8 +15,8 @@ class Inventory {
         }
     }
     AddProduct() {
-        const id = this.currentId;
-        this.currentId++
+
+        const id = Date.now();
         const name = prompt("Veuillez entrer le nom de ce produit:");
         const description = prompt("Veuillez décrire le produit:")
         const quantity = prompt("Veuillez entrer la quantité du produit:");
@@ -46,27 +37,29 @@ class Inventory {
     displayProduct() {
         if (this.Products.length === 0)
             console.log(" le stock est vide!!!!")
-        else
+        else {
             console.log("------------------------------------------");
-        console.log("--- Liste des produits dans le stock : ---");
-        console.log("------------------------------------------");
-        this.Products.forEach(product => {
-            console.log(` ID:${product.id}`);
-            console.log(` Nome:${product.name}`);
-            console.log(` Description:${product.description}`);
-            console.log(` Quantité:${product.quantity}`);
-            console.log(` Prix:${product.price}`);
+            console.log("--- Liste des produits dans le stock : ---");
             console.log("------------------------------------------");
-        });
+            this.Products.forEach((product, index) => {
+                console.log(` Numéro dans le tableau: ${index + 1}`);
+                console.log(` Nome:${product.name}`);
+                console.log(` Description:${product.description}`);
+                console.log(` Quantité:${product.quantity}`);
+                console.log(` Prix:${product.price}`);
+                console.log("------------------------------------------");
+            })
+        };
     };
     updateProduct() {
         if (this.Products.length === 0) {
             console.log(" le stock est vide!!!!")
             return;
         } else {
-            const id = +prompt(" ID du produit ");
-            const product = this.Products.find(p => p.id == id);
-            if (product) {
+            const number = +prompt(" nomber  du produit a mettre à jour : ");
+            const index = number - 1;
+            if (index >= 0 && index < this.Products.length) {
+                const product = this.Products[index];
                 let nvQuantity = +prompt("nouvelle quantité:");
                 if (isNaN(nvQuantity) || nvQuantity <= 0) {
                     console.log("quantité invalide.");
@@ -88,15 +81,12 @@ class Inventory {
     deleteProduct() {
         if (this.Products.length === 0) {
             console.log("Stock vide !")
-<<<<<<< HEAD
-=======
             return;
->>>>>>> f701db886fe91c888070ce39ab7dd04c6870936f
         }
-        const id = +prompt(" entrer le ID à supprimer:")
-        const index = this.Products.findIndex(p => p.id === id);
-        if (index !== -1) {
-            this.Products.splice(index, 1);
+        const number = +prompt(" entrer le numéro du produit à supprimer:")
+        const index = number - 1;
+        if (index >= 0 && index < this.Products.length) {
+            this.Products.splice(index, );
             console.log("Produit supprimé!!");
             this.saveToFile();
         } else {

@@ -1,13 +1,21 @@
 const prompt = require("prompt-sync")();
 const fs = require('fs');
+<<<<<<< HEAD
 const Product = require("./Product");
+=======
+const Product = require("./product");
+>>>>>>> f701db886fe91c888070ce39ab7dd04c6870936f
 class Inventory {
     constructor() {
         this.Products = [];
         this.filePath = 'products.json';
         this.currentId = 1;
     }
+<<<<<<< HEAD
     saveToFile(){
+=======
+    saveToFile() {
+>>>>>>> f701db886fe91c888070ce39ab7dd04c6870936f
         try {
             fs.writeFileSync(this.filePath, JSON.stringify(this.Products, null, 3));
             console.log("Données sauvegardées !");
@@ -80,6 +88,10 @@ class Inventory {
     deleteProduct() {
         if (this.Products.length === 0) {
             console.log("Stock vide !")
+<<<<<<< HEAD
+=======
+            return;
+>>>>>>> f701db886fe91c888070ce39ab7dd04c6870936f
         }
         const id = +prompt(" entrer le ID à supprimer:")
         const index = this.Products.findIndex(p => p.id === id);
